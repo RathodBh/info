@@ -1,0 +1,80 @@
+// collage name 
+let collageNames = [
+    "Chimanbhai MU Patel Industrial Training Centre, Vallabh Vidyanagar",
+    "Vadodara Design Academy School Of Architecture, Vadodara",
+    "G H Patel Department of computer Science and Technology, Vallabh vidhyanagar",
+    "Babaria Institute Of Technology, Varnama",
+    "Vanvasi Seva Samaj BEd College, Pavi Jetpur",
+    "Sheth M N C College Of Education, Dabhoi",
+    "Shri Janki Vallabh Arts And Shri MS Patel Commerce College, Muval ",
+    "Kapadia N M M S Arts & The S N S B Commerce College, Sankheda",
+    "Babaria Institute Of Technology BIT, Vadodara",
+    "Gujarat Flying Club, Vadodara",
+    "Shree Mahalaxmi Mahila Homeopathic Medical College, Vadodara",
+    "Indian Institute of Information Technology (IIIT), Vadodara",
+    "Parul Institute of Engineering & Technology, Limda",
+    "Unitedworld Institute of Design (UID), Ahmedabad",
+    "Som Lalit Institute Of Business Administration SLIBA, Ahmedabad",
+    "Som Lalit College Of Commerce SLCC, Ahmedabad",
+    "Silver Oak College Of Engineering & Technology SOCET, Ahmedabad",
+    "Physical Research Laboratory, Navrangpura",
+    "R B Institute Of Management Studies, Naroda",
+    "B M Institute Of Mental Health, Ahmedabad",
+    "L M College Of Pharmacy, Navrangpura",
+    "Sheth M.C. College of Dairy Science, Anand",
+    "Ipcowala Santram College Of Fine Arts, Anand",
+    "Nalini Arvind & TV Patel Arts College, Anand",
+    "AR College Of Pharmacy & GH Patel Institute Of Pharmacy, Vallabh Vidyanagar",
+    "Birla Vishvakarma Mahavidyalaya BVM, Anand",
+    "PD Patel Institute Of Applied Sciences PDPIAS, Anand",
+    "Indukaka Ipcowala College Of Pharmacy, Anand",
+    "College Of Agricultural Information Technology, Anand",
+    "Shantilal Shah Engineering College, Bhavnagar",
+    "Swami Vivekanand Homeopathic Medical College, Bhavnagar",
+    "Govt Medical College, Bhavnagar",
+    "Shri Samanvay Institute Of Pharmacy, Botad",
+    "Shree Sahajanand Institute of Management, Bhavnagar",
+    "Smt PNR Shah Mahila Arts & Commerce College, Palitana",
+    "Shri Gulabrai H Sanghvi Shikshan Mahavidyalaya, Bhavnagar",
+    "JC Kumarappa Mahavidyalaya, Gadhada",
+    "Samaldas Arts College, Bhavnagar",
+    "School Of Physiotherapy, Rajkot",
+    "Shree BA Dangar Homeopathic Medical College, Rajkot",
+    "Indubhai Parekh School Of Architecture, Rajkot",
+    "BK Mody Government Pharmacy College, Rajkot",
+    "Shree HN Shukla Institute of Pharmaceutical Education and Research, Rajkot",
+    "Christ College, Rajkot",
+    "Shri K K Sheth Physiotherapy College, Rajkot",
+    "J S Ayurved Mahavidyalaya, Nadiad ",
+    "U T S Mahila Arts College, Nadiad",
+    "Ayurveda Samsthanam, Nadiad",
+    "Sabar Institute Of Technology For Girls, Sabarkantha",
+    "Grow More Faculty of Computer Application (MCA), Himmatnagar"
+]
+
+for(let i=1;i<=50;i++){
+    console.log(`INSERT INTO BH.collageMaster(id,collageName) VALUES(${i},"${collageNames[i-1]}");`);
+}
+
+
+//Using node
+//insert 10000 records random using api
+
+const randomNum = (n) => Math.floor(Math.random()*n) + 1; //from 1
+const randomNumBet = (min,max) => Math.floor(Math.random()* (max - min) + min) ; //from 1
+
+let random_name = require("random-indian-name");
+let cities = require('cities');
+let randomEmail = require('random-email');
+
+let fs = require('fs');
+let path = require('path');
+let fullPath = path.join(__dirname,"saveRecord.txt");
+
+let str = "";
+
+for(let i=1;i<=10000;i++){
+  str += `INSERT INTO BH.studentMaster(firstName,lastName,contactNumber,emailId,city,collageId) VALUES("${random_name({first:true})}","${random_name({last:true})}","${randomNumBet(6300000000,9700000000)}","${randomEmail({ domain: 'gmail.com' })}","${cities.findByState('IN')[randomNum(750)].city}",${randomNum(50)});`; 
+}
+
+fs.writeFileSync(fullPath,str);
